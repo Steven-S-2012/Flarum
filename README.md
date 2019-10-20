@@ -139,8 +139,10 @@
     use Illuminate\Container\Container;
 
     $container = Container::getInstance();
-
+   
+    // $userManager = new UserManager(new Mailer);
     $userManager = $container->make(UserManager::class);
+    
     $userManager->register('dave@davejamesmiller.com', 'MySuperSecurePassword!');
 ```
  
@@ -250,4 +252,23 @@
     $container->bind(AnotherInterface::class, AnotherClass::class);
 
     $instance = $container->make(MyInterface::class);
+ ```
+ + multiple bind
+ ```
+    use Illuminate\Support\Facades\Storage;
+    use App\Http\Controllers\PhotoController;
+    use App\Http\Controllers\VideoController;
+    use Illuminate\Contracts\Filesystem\Filesystem;
+
+    $this->app->when(PhotoController::class)
+             ->needs(Filesystem::class)
+             ->give(function () {
+                 return Storage::disk('local');
+             });
+
+    $this->app->when(VideoController::class)
+             ->needs(Filesystem::class)
+             ->give(function () {
+                 return Storage::disk('s3');
+             });
  ```
