@@ -202,7 +202,7 @@
  
     All Laravel's services are bootstrapped via service providers.
  ```
-    class RiakServiceProvider extends ServiceProvider
+    class TransformService extends ServiceProvider
     {
         public function register()
         {
