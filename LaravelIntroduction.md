@@ -182,7 +182,7 @@
 
     // Bind Closure to Autobot classname
     $container->bind('autobot', function($container, $moduleName) {
-        return new Superman($container->make($moduleName));
+        return new Autobot($container->make($moduleName));
     });
 
     // Bind Closure to ability factory class
